@@ -39,7 +39,7 @@ import User from '../../models/users'
  *     }
  */
 export async function createUser (ctx) {
-  const user = new User(ctx.request.body.user)
+  const user = new User(ctx.request.body)
   try {
     await user.save()
   } catch (err) {
@@ -52,6 +52,7 @@ export async function createUser (ctx) {
   delete response.password
 
   ctx.body = {
+    status: 201,
     user: response,
     token
   }
@@ -86,7 +87,10 @@ export async function createUser (ctx) {
  */
 export async function getUsers (ctx) {
   const users = await User.find({}, '-password')
-  ctx.body = { users }
+  ctx.body = {
+    status: 200,
+    users
+  }
 }
 
 /**
@@ -124,6 +128,7 @@ export async function getUser (ctx, next) {
     }
 
     ctx.body = {
+      status: 200,
       user
     }
   } catch (err) {
@@ -185,6 +190,7 @@ export async function updateUser (ctx) {
   await user.save()
 
   ctx.body = {
+    status: 201,
     user
   }
 }
@@ -215,8 +221,8 @@ export async function deleteUser (ctx) {
 
   await user.remove()
 
-  ctx.status = 200
   ctx.body = {
+    status: 200,
     success: true
   }
 }

@@ -63,6 +63,7 @@ export async function authUser (ctx, next) {
     delete response.password
 
     ctx.body = {
+      status: 200,
       token,
       user: response
     }

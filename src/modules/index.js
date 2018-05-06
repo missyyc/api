@@ -1,5 +1,6 @@
 import glob from 'glob'
 import Router from 'koa-router'
+import config from '../../config'
 
 exports = module.exports = function initModules (app) {
   glob(`${__dirname}/*`, { ignore: '**/index.js' }, (err, matches) => {
@@ -10,8 +11,7 @@ exports = module.exports = function initModules (app) {
 
       const routes = router.default
       const baseUrl = router.baseUrl
-      const instance = new Router({ prefix: baseUrl })
-
+      const instance = new Router({ prefix: config.apiVersion + baseUrl })
       routes.forEach((config) => {
         const {
           method = '',
