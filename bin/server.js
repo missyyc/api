@@ -23,14 +23,14 @@ app.use(bodyParser())
 app.use(session())
 app.use(errorMiddleware())
 app.use(cors({
-  origin: () => {
-    return 'http://localhost:8002'
-  },
-  exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
-  maxAge: 5,
-  credentials: true,
-  allowMethods: ['GET', 'POST', 'DELETE', 'PUT'],
-  allowHeaders: ['Content-Type', 'Authorization', 'Accept']
+    origin: () => {
+        return 'http://localhost:8002'
+    },
+    exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
+    maxAge: 5,
+    credentials: true,
+    allowMethods: ['GET', 'POST', 'DELETE', 'PUT'],
+    allowHeaders: ['Content-Type', 'Authorization', 'Accept']
 }))
 
 app.use(convert(mount('/docs', serve(`${process.cwd()}/docs`))))
@@ -43,7 +43,7 @@ const modules = require('../src/modules')
 modules(app)
 
 app.listen(config.port, () => {
-  console.log(`Server started on ${config.port}`)
+    console.log(`Server started on ${config.port}`)
 })
 
 export default app

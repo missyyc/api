@@ -39,23 +39,23 @@ import User from '../../models/users'
  *     }
  */
 export async function createUser (ctx) {
-  const user = new User(ctx.request.body)
-  try {
-    await user.save()
-  } catch (err) {
-    ctx.throw(422, err.message)
-  }
+    const user = new User(ctx.request.body)
+    try {
+        await user.save()
+    } catch (err) {
+        ctx.throw(422, err.message)
+    }
 
-  const token = user.generateToken()
-  const response = user.toJSON()
+    const token = user.generateToken()
+    const response = user.toJSON()
 
-  delete response.password
+    delete response.password
 
-  ctx.body = {
-    status: 201,
-    user: response,
-    token
-  }
+    ctx.body = {
+        status: 201,
+        user: response,
+        token
+    }
 }
 
 /**
@@ -86,11 +86,11 @@ export async function createUser (ctx) {
  * @apiUse TokenError
  */
 export async function getUsers (ctx) {
-  const users = await User.find({}, '-password')
-  ctx.body = {
-    status: 200,
-    users
-  }
+    const users = await User.find({}, '-password')
+    ctx.body = {
+        status: 200,
+        users
+    }
 }
 
 /**
@@ -121,25 +121,25 @@ export async function getUsers (ctx) {
  * @apiUse TokenError
  */
 export async function getUser (ctx, next) {
-  try {
-    const user = await User.findById(ctx.params.id, '-password')
-    if (!user) {
-      ctx.throw(404)
+    try {
+        const user = await User.findById(ctx.params.id, '-password')
+        if (!user) {
+            ctx.throw(404)
+        }
+
+        ctx.body = {
+            status: 200,
+            user
+        }
+    } catch (err) {
+        if (err === 404 || err.name === 'CastError') {
+            ctx.throw(404)
+        }
+
+        ctx.throw(500)
     }
 
-    ctx.body = {
-      status: 200,
-      user
-    }
-  } catch (err) {
-    if (err === 404 || err.name === 'CastError') {
-      ctx.throw(404)
-    }
-
-    ctx.throw(500)
-  }
-
-  if (next) { return next() }
+    if (next) { return next() }
 }
 
 /**
@@ -183,16 +183,16 @@ export async function getUser (ctx, next) {
  * @apiUse TokenError
  */
 export async function updateUser (ctx) {
-  const user = ctx.body.user
+    const user = ctx.body.user
 
-  Object.assign(user, ctx.request.body.user)
+    Object.assign(user, ctx.request.body.user)
 
-  await user.save()
+    await user.save()
 
-  ctx.body = {
-    status: 201,
-    user
-  }
+    ctx.body = {
+        status: 201,
+        user
+    }
 }
 
 /**
@@ -217,12 +217,12 @@ export async function updateUser (ctx) {
  */
 
 export async function deleteUser (ctx) {
-  const user = ctx.body.user
+    const user = ctx.body.user
 
-  await user.remove()
+    await user.remove()
 
-  ctx.body = {
-    status: 200,
-    success: true
-  }
+    ctx.body = {
+        status: 200,
+        success: true
+    }
 }

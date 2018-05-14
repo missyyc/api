@@ -1,27 +1,27 @@
-import Song from '../../models/song'
+import Album from '../../models/album'
 
-export async function listSongs (ctx) {
+export async function listAlbums (ctx) {
     try {
-        const songs = await Song.find({}).populate('tags').sort('-_id')
+        const albums = await Album.find({}).sort('-created')
 
         ctx.status = 200
         ctx.body = {
-            results: songs
+            results: albums
         }
     } catch (err) {
         ctx.throw(422, err.message)
     }
 }
 
-export async function createSong (ctx) {
-    const song = new Song(ctx.request.body)
+export async function createAlbum (ctx) {
+    const album = new Album(ctx.request.body)
     try {
-        await song.save()
+        await album.save()
     } catch (err) {
         ctx.throw(422, err.message)
     }
 
-    const response = song.toJSON()
+    const response = album.toJSON()
 
     ctx.status = 201
     ctx.body = {
@@ -29,9 +29,9 @@ export async function createSong (ctx) {
     }
 }
 
-export async function readSong (ctx, next) {
+export async function readAlbum (ctx, next) {
     try {
-        const result = await Song.findById(ctx.params.id).populate('tags')
+        const result = await Album.findById(ctx.params.id)
         if (!result) {
             ctx.throw(404)
         }
@@ -51,7 +51,7 @@ export async function readSong (ctx, next) {
     if (next) { return next() }
 }
 
-export async function updateSong (ctx) {
+export async function updateAlbum (ctx) {
     const result = ctx.body.result
 
     Object.assign(result, ctx.request.body)
@@ -64,23 +64,23 @@ export async function updateSong (ctx) {
     }
 }
 
-export async function updateMultiSongs (ctx) {
+export async function updateMultiAlbums (ctx) {
     const { ids, attrs } = ctx.request.body
     try {
-        await Song.update({_id: {$in: ids}}, attrs, {multi: true})
+        await Album.update({_id: {$in: ids}}, attrs, {multi: true})
         ctx.status = 201
         ctx.body = {
-            message: 'Update Multiple Songs Success!'
+            message: 'Update Multiple Albums Success!'
         }
     } catch (err) {
         ctx.throw(422, err.message)
     }
 }
 
-export async function deleteSong (ctx) {
+export async function deleteAlbum (ctx) {
     const { id } = ctx.params
     try {
-        await Song.remove({ _id: id })
+        await Album.remove({ _id: id })
         ctx.body = {
             message: 'Delete Success!'
         }
@@ -89,12 +89,12 @@ export async function deleteSong (ctx) {
     }
 }
 
-export async function deleteMultiSongs (ctx) {
+export async function deleteMultiAlbums (ctx) {
     const { ids } = ctx.request.body
     try {
-        await Song.remove({_id: {$in: ids}})
+        await Album.remove({_id: {$in: ids}})
         ctx.body = {
-            message: 'Delete Multiple Songs Success!'
+            message: 'Delete Multiple Albums Success!'
         }
     } catch (err) {
         ctx.throw(422, err.message)

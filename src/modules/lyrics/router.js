@@ -1,14 +1,14 @@
 import { ensureUser } from '../../middleware/validators'
-import * as tags from './controller'
+import * as lyrics from './controller'
 
-export const baseUrl = '/tags'
+export const baseUrl = '/lyrics'
 
 export default [
     {
         method: 'POST',
         route: '/create',
         handlers: [
-            tags.createTag
+            lyrics.createLyric
         ]
     },
     {
@@ -16,7 +16,7 @@ export default [
         route: '/list',
         handlers: [
       // ensureUser,
-            tags.listTags
+            lyrics.listLyrics
         ]
     },
     {
@@ -24,22 +24,22 @@ export default [
         route: '/read/:id',
         handlers: [
             ensureUser,
-            tags.readTag
+            lyrics.readLyric
         ]
     },
     {
         method: 'PUT',
         route: '/update/:id',
         handlers: [
-            tags.readTag,
-            tags.updateTag
+            lyrics.readLyric,
+            lyrics.updateLyric
         ]
     },
     {
         method: 'POST',
         route: '/update/multi',
         handlers: [
-            tags.updateMultiTags
+            lyrics.updateMultiLyrics
         ]
     },
     {
@@ -47,14 +47,14 @@ export default [
         route: '/delete/:id',
         handlers: [
       // ensureUser,
-            tags.deleteTag
+            lyrics.deleteLyric
         ]
     },
     {
         method: 'POST',
         route: '/delete/multi',
         handlers: [
-            tags.deleteMultiTags
+            lyrics.deleteMultiLyrics
         ]
     }
 ]

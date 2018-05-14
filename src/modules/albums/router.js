@@ -1,14 +1,14 @@
 import { ensureUser } from '../../middleware/validators'
-import * as tags from './controller'
+import * as albums from './controller'
 
-export const baseUrl = '/tags'
+export const baseUrl = '/albums'
 
 export default [
     {
         method: 'POST',
         route: '/create',
         handlers: [
-            tags.createTag
+            albums.createAlbum
         ]
     },
     {
@@ -16,7 +16,7 @@ export default [
         route: '/list',
         handlers: [
       // ensureUser,
-            tags.listTags
+            albums.listAlbums
         ]
     },
     {
@@ -24,22 +24,22 @@ export default [
         route: '/read/:id',
         handlers: [
             ensureUser,
-            tags.readTag
+            albums.readAlbum
         ]
     },
     {
         method: 'PUT',
         route: '/update/:id',
         handlers: [
-            tags.readTag,
-            tags.updateTag
+            albums.readAlbum,
+            albums.updateAlbum
         ]
     },
     {
         method: 'POST',
         route: '/update/multi',
         handlers: [
-            tags.updateMultiTags
+            albums.updateMultiAlbums
         ]
     },
     {
@@ -47,14 +47,14 @@ export default [
         route: '/delete/:id',
         handlers: [
       // ensureUser,
-            tags.deleteTag
+            albums.deleteAlbum
         ]
     },
     {
         method: 'POST',
         route: '/delete/multi',
         handlers: [
-            tags.deleteMultiTags
+            albums.deleteMultiAlbums
         ]
     }
 ]

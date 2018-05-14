@@ -1,6 +1,6 @@
 {
   "name": "missyyc-api",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Koa2 boilerplate covering essentials for APIs",
   "main": "index.js",
   "scripts": {
@@ -51,6 +51,7 @@
     "koa-router": "^7.0.1",
     "koa-static": "^2.0.0",
     "koa2-cors": "^2.0.5",
+    "moment": "^2.22.1",
     "mongoose": "^4.4.3",
     "passport-local": "^1.0.0",
     "qiniu": "^7.1.3"
