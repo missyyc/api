@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+- '8'
+before_install:
+- openssl aes-256-cbc -K $encrypted_29a2b04c18fd_key -iv $encrypted_29a2b04c18fd_iv
+  -in id_rsa.enc -out ~/.ssh/id_rsa -d
+- chmod 600 ~/.ssh/id_rsa
+- echo -e "Host 116.62.234.196\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+
+script: true
+
+
+after_success:
+  - ssh root@116.62.234.196 'cd /www/missyyc/api && git pull'
