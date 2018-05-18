@@ -8,9 +8,9 @@ before_install:
 - echo -e "Host 116.62.234.196\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 script: true
 after_success:
-- ssh root@116.62.234.196 'cd /www/missyyc/api'
-deploy:
-  provider: script
-  script: "./deploy.sh"
-  on:
-    branch: master
+- ssh root@116.62.234.196 'cd /www/missyyc/api && git pull origin HEAD'
+# deploy:
+#   provider: script
+#   script: "./deploy.sh"
+#   on:
+#     branch: master
