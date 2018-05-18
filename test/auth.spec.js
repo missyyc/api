@@ -32,7 +32,7 @@ describe('Auth', () => {
       request
         .post('/auth')
         .set('Accept', 'application/json')
-        .send({ username: 'test', password: 'pass' })
+        .send({ username: 'test1', password: 'pass' })
         .expect(200, (err, res) => {
           if (err) { return done(err) }
 
