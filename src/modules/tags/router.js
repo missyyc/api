@@ -8,6 +8,7 @@ export default [
         method: 'POST',
         route: '/create',
         handlers: [
+            ensureUser,
             tags.createTag
         ]
     },
@@ -15,7 +16,6 @@ export default [
         method: 'GET',
         route: '/list',
         handlers: [
-      // ensureUser,
             tags.listTags
         ]
     },
@@ -23,7 +23,6 @@ export default [
         method: 'GET',
         route: '/read/:id',
         handlers: [
-            ensureUser,
             tags.readTag
         ]
     },
@@ -31,6 +30,7 @@ export default [
         method: 'PUT',
         route: '/update/:id',
         handlers: [
+            ensureUser,
             tags.readTag,
             tags.updateTag
         ]
@@ -39,6 +39,7 @@ export default [
         method: 'POST',
         route: '/update/multi',
         handlers: [
+            ensureUser,
             tags.updateMultiTags
         ]
     },
@@ -46,7 +47,7 @@ export default [
         method: 'DELETE',
         route: '/delete/:id',
         handlers: [
-      // ensureUser,
+            ensureUser,
             tags.deleteTag
         ]
     },
@@ -54,6 +55,7 @@ export default [
         method: 'POST',
         route: '/delete/multi',
         handlers: [
+            ensureUser,
             tags.deleteMultiTags
         ]
     }

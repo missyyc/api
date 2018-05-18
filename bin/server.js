@@ -23,9 +23,10 @@ app.use(bodyParser())
 app.use(session())
 app.use(errorMiddleware())
 app.use(cors({
-    origin: () => {
-        return 'http://localhost:8002'
-    },
+    // origin: () => {
+    //     return ['http://yyc.com:8080']
+    // },
+    origin: false,
     exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
     maxAge: 5,
     credentials: true,

@@ -8,6 +8,7 @@ export default [
         method: 'POST',
         route: '/create',
         handlers: [
+            ensureUser,
             albums.createAlbum
         ]
     },
@@ -15,7 +16,6 @@ export default [
         method: 'GET',
         route: '/list',
         handlers: [
-      // ensureUser,
             albums.listAlbums
         ]
     },
@@ -31,6 +31,7 @@ export default [
         method: 'PUT',
         route: '/update/:id',
         handlers: [
+            ensureUser,
             albums.readAlbum,
             albums.updateAlbum
         ]
@@ -39,6 +40,7 @@ export default [
         method: 'POST',
         route: '/update/multi',
         handlers: [
+            ensureUser,
             albums.updateMultiAlbums
         ]
     },
@@ -46,7 +48,7 @@ export default [
         method: 'DELETE',
         route: '/delete/:id',
         handlers: [
-      // ensureUser,
+            ensureUser,
             albums.deleteAlbum
         ]
     },
@@ -54,6 +56,7 @@ export default [
         method: 'POST',
         route: '/delete/multi',
         handlers: [
+            ensureUser,
             albums.deleteMultiAlbums
         ]
     }

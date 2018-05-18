@@ -13,7 +13,7 @@ const Album = new mongoose.Schema({
         key: { type: String },
         uid: { type: String }
     },
-    songs: [{ type: Schema.Types.ObjectId, ref: 'song' }], // 专辑歌曲
+    songs: [{ type: Schema.Types.ObjectId, ref: 'audio' }], // 专辑歌曲
     desc: { type: String }, // 对专辑的描述，ex：伤心五连，这个女人好狠！
     play_times: { type: Number, default: 0 },  // 播放次数
     love_times: { type: Number, default: 0 }, // 点赞次数

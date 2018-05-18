@@ -1,24 +1,25 @@
 import { ensureUser } from '../../middleware/validators'
 
-import * as lyrics from '../lyrics/controller'
-import * as songs from './controller'
+import { ensureLyric } from '../lyrics/controller'
+import * as audios from './controller'
 
-export const baseUrl = '/songs'
+export const baseUrl = '/audios'
 
 export default [
     {
         method: 'POST',
         route: '/create',
         handlers: [
-            songs.createSong
+            ensureUser,
+            ensureLyric,
+            audios.createAudio
         ]
     },
     {
         method: 'GET',
         route: '/list',
         handlers: [
-            // ensureUser,
-            songs.listSongs
+            audios.listAudios
         ]
     },
     {
@@ -26,38 +27,40 @@ export default [
         route: '/read/:id',
         handlers: [
             // ensureUser,
-            lyrics.ensureLyric,
-            songs.readSong
+            audios.readAudio
         ]
     },
     {
         method: 'PUT',
         route: '/update/:id',
         handlers: [
-            songs.readSong,
-            songs.updateSong
+            ensureUser,
+            audios.readAudio,
+            audios.updateAudio
         ]
     },
     {
         method: 'POST',
         route: '/update/multi',
         handlers: [
-            songs.updateMultiSongs
+            ensureUser,
+            audios.updateMultiAudios
         ]
     },
     {
         method: 'DELETE',
         route: '/delete/:id',
         handlers: [
-            // ensureUser,
-            songs.deleteSong
+            ensureUser,
+            audios.deleteAudio
         ]
     },
     {
         method: 'POST',
         route: '/delete/multi',
         handlers: [
-            songs.deleteMultiSongs
+            ensureUser,
+            audios.deleteMultiAudios
         ]
     }
 ]

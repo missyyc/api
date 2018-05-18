@@ -8,6 +8,7 @@ export default [
         method: 'POST',
         route: '/create',
         handlers: [
+            ensureUser,
             lyrics.createLyric
         ]
     },
@@ -31,6 +32,7 @@ export default [
         method: 'PUT',
         route: '/update/:id',
         handlers: [
+            ensureUser,
             lyrics.readLyric,
             lyrics.updateLyric
         ]
@@ -39,6 +41,7 @@ export default [
         method: 'POST',
         route: '/update/multi',
         handlers: [
+            ensureUser,
             lyrics.updateMultiLyrics
         ]
     },
@@ -46,7 +49,7 @@ export default [
         method: 'DELETE',
         route: '/delete/:id',
         handlers: [
-      // ensureUser,
+            ensureUser,
             lyrics.deleteLyric
         ]
     },
@@ -54,6 +57,7 @@ export default [
         method: 'POST',
         route: '/delete/multi',
         handlers: [
+            ensureUser,
             lyrics.deleteMultiLyrics
         ]
     }

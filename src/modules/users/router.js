@@ -8,6 +8,7 @@ export default [
         method: 'POST',
         route: '/',
         handlers: [
+            ensureUser,
             user.createUser
         ]
     },
@@ -15,7 +16,6 @@ export default [
         method: 'GET',
         route: '/',
         handlers: [
-            ensureUser,
             user.getUsers
         ]
     },
@@ -23,7 +23,6 @@ export default [
         method: 'GET',
         route: '/:id',
         handlers: [
-            ensureUser,
             user.getUser
         ]
     },

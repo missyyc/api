@@ -2,7 +2,10 @@ import Album from '../../models/album'
 
 export async function listAlbums (ctx) {
     try {
-        const albums = await Album.find({}).sort('-created')
+        const albums = await Album.find({})
+                                .populate('tags')
+                                .populate('songs')
+                                .sort('-_id')
 
         ctx.status = 200
         ctx.body = {
