@@ -11,4 +11,10 @@ script: true
 
 
 after_success:
-  - ssh root@116.62.234.196 'cd /www/missyyc/api && git pull'
+  - ssh root@116.62.234.196 'cd /www/missyyc/api'
+
+deploy:
+  provider: script
+  script: ./deploy.sh
+  on:
+    branch: master
