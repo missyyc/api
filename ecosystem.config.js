@@ -8,7 +8,7 @@ module.exports = {
     // First application
     {
       name      : 'API',
-      script    : 'bin/server.js',
+      script    : 'index.js',
       env: {
         COMMON_VARIABLE: 'true'
       },
@@ -25,18 +25,18 @@ module.exports = {
   deploy : {
     production : {
       user : 'node',
-      host : '212.83.163.1',
+      host : '116.62.234.196',
       ref  : 'origin/master',
       repo : 'git@github.com:repo.git',
-      path : '/var/www/production',
+      path : '/root/www/missyyc/api',
       'post-deploy' : 'npm install && pm2 reload ecosystem.config.js --env production'
     },
     dev : {
       user : 'node',
-      host : '212.83.163.1',
+      host : '116.62.234.196',
       ref  : 'origin/master',
       repo : 'git@github.com:repo.git',
-      path : '/var/www/development',
+      path : '/Users/mojixiang/Codes/AwesomeProjects/missyyc/api',
       'post-deploy' : 'npm install && pm2 reload ecosystem.config.js --env dev',
       env  : {
         NODE_ENV: 'dev'
