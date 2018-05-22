@@ -6,6 +6,7 @@ const Schema = mongoose.Schema
 const Audio = new mongoose.Schema({
     type: { type: String, default: 'song' }, // 音频类型：歌曲: song，直播音频: live_audio
     audio_name: { type: String }, // 音频名
+    subtitle: { type: String }, // 副标题, 小冤家（舔粉版）
     sing_date: { type: Date, default: Date.now }, // 歌唱日期
     desc: { type: String }, // 对歌曲的描述，ex：惊艳的翻唱，演绎十二人的大唐红颜付
     img: {
@@ -17,7 +18,7 @@ const Audio = new mongoose.Schema({
         uid: { type: String }
     },
     cover_singer: { type: String }, // 翻唱自
-    lyrics: { type: Schema.ObjectId }, // 歌词
+    lyrics: { type: Schema.ObjectId, ref: "lyric" }, // 歌词
     play_times: { type: Number, default: 0 },  // 播放次数
     love_times: { type: Number, default: 0 }, // 点赞次数
     tags: [{ type: Schema.Types.ObjectId, ref: 'tag' }],
