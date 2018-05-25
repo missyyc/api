@@ -21,6 +21,13 @@ export default [
     },
     {
         method: 'GET',
+        route: '/current',
+        handlers: [
+            user.getCurrentUser
+        ]
+    },
+    {
+        method: 'GET',
         route: '/:id',
         handlers: [
             user.getUser

@@ -1,4 +1,7 @@
 import User from '../../models/users'
+import config from '../../../config'
+import { getToken } from '../../utils/auth';
+import { verify } from 'jsonwebtoken';
 
 /**
  * @api {post} /users Create a new user
@@ -140,6 +143,27 @@ export async function getUser (ctx, next) {
     }
 
     if (next) { return next() }
+}
+
+export async function getCurrentUser (ctx, next) {
+    const token = getToken(ctx)
+
+    if (!token) {
+        ctx.throw(401)
+    }
+
+    let decoded = null
+    try {
+        decoded = verify(token, config.token)
+    } catch (err) {
+        ctx.throw(401)
+    }
+
+    const user = await User.findById(decoded.id, '-password')
+
+    ctx.body = {
+        user
+    }
 }
 
 /**
