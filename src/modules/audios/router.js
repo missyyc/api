@@ -1,6 +1,6 @@
 import { ensureUser } from '../../middleware/validators'
 
-import { ensureLyric } from '../lyrics/controller'
+import { findLyricByKugou } from '../lyrics/controller'
 import * as audios from './controller'
 
 export const baseUrl = '/audios'
@@ -11,7 +11,7 @@ export default [
         route: '/create',
         handlers: [
             ensureUser,
-            ensureLyric,
+            findLyricByKugou,
             audios.createAudio
         ]
     },

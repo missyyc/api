@@ -31,9 +31,9 @@ export async function createLyric (ctx) {
     }
 }
 
-export async function ensureLyric(ctx, next) {
-    const { type, song_name, cover_singer } = ctx.request.body
-    // const song_name = '想你的365天'
+export async function findLyricByKugou(ctx, next) {
+    const { type, audio_name, cover_singer } = ctx.request.body
+    // const audio_name = '想你的365天'
     // const cover_singer = '李玟'
 
     if (type === 'live_audio') {
@@ -41,13 +41,13 @@ export async function ensureLyric(ctx, next) {
     }
 
     try {
-        const result = await Lyric.find({song_name})
+        const result = await Lyric.find({audio_name})
         
         if (result.length > 0) {
             return next()
         } else {
             // 如果没有歌词就从网易云下载，并存到本地
-            const keyword = urlencode(`${song_name}-${cover_singer}`)
+            const keyword = urlencode(`${audio_name}-${cover_singer}`)
             const ret = await axios.get(`http://mobilecdn.kugou.com/api/v3/search/song?format=json&keyword=${keyword}&page=1&pagesize=20&showtype=1`)
             const song_ret = ret.data.data.info[0]
             const { hash, filename } = song_ret
@@ -56,7 +56,7 @@ export async function ensureLyric(ctx, next) {
             const { lyrics } = songRet.data.data
 
             const lyric = new Lyric({
-                song_name,
+                song_name: audio_name,
                 singer: cover_singer,
                 lyrics
             })

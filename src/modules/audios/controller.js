@@ -18,11 +18,10 @@ export async function listAudios (ctx) {
 }
 
 export async function createAudio (ctx) {
-
     let audio
 
     if (ctx.state.lyricId) {
-        const newAudio = Object.assign(ctx.request.body, { lyric: ctx.state.lyricId })
+        const newAudio = Object.assign(ctx.request.body, { lyrics: ctx.state.lyricId })
         audio = new Audio(newAudio)
     } else {
         audio = new Audio(ctx.request.body)
