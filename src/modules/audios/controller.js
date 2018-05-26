@@ -6,7 +6,7 @@ export async function listAudios (ctx) {
         const audios = await Audio.find(query)
                                 .populate('tags')
                                 .populate('lyrics')
-                                .sort('-_id')
+                                .sort('-sing_date')
 
         ctx.status = 200
         ctx.body = {

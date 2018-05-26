@@ -19,7 +19,3 @@ export function generateUploadToken (ctx) {
     }
 }
 
-export function createQiniu (ctx) {
-
-}
-

@@ -6,11 +6,13 @@ export async function listAlbums (ctx) {
                                 .populate('tags')
                                 .populate('songs')
                                 .sort('-_id')
-
-        ctx.status = 200
-        ctx.body = {
-            results: albums
-        }
+                                .deepPopulate(['songs.lyrics', 'songs.tags'])
+                                    .then(ret => {
+                                        ctx.status = 200
+                                        ctx.body = {
+                                            results: ret
+                                        }
+                                    })
     } catch (err) {
         ctx.throw(422, err.message)
     }

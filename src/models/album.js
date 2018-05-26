@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+const deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 const Schema = mongoose.Schema
 
@@ -19,5 +20,7 @@ const Album = new mongoose.Schema({
     love_times: { type: Number, default: 0 }, // 点赞次数
     tags: [{ type: Schema.Types.ObjectId, ref: 'tag' }] // 专辑标签
 })
+
+Album.plugin(deepPopulate)
 
 export default mongoose.model('album', Album)
