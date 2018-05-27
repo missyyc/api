@@ -7,3 +7,7 @@
 
 ###### Version 0.0.4
 1. 修复audio的source无法保存的BUG.
+
+###### Version 0.0.5
+1. 增加搜索功能
+2. 增加album专辑deepPopulate功能
