@@ -7,7 +7,7 @@ export function generateUploadToken (ctx) {
 
     const options = {
         scope: 'yychong',
-        expires: 7200
+        expires: 3153600
     }
 
     const putPolicy = new qiniu.rs.PutPolicy(options)
