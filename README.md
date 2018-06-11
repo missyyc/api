@@ -11,3 +11,6 @@
 ###### Version 0.0.5
 1. 增加搜索功能
 2. 增加album专辑deepPopulate功能
+
+###### Version 0.0.6
+1. 增加批量上传歌曲的接口

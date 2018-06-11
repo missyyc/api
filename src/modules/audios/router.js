@@ -16,6 +16,14 @@ export default [
         ]
     },
     {
+        method: 'POST',
+        route: '/create/multi',
+        handlers: [
+            ensureUser,
+            audios.createMultiAudios
+        ]
+    },
+    {
         method: 'GET',
         route: '/list',
         handlers: [

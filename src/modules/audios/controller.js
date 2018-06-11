@@ -1,4 +1,6 @@
 import Audio from '../../models/audio'
+import Lyric from '../../models/lyric'
+import { fetchLyric } from '../lyrics/controller.js';
 
 export async function listAudios (ctx) {
     let query = ctx.request.query
@@ -38,6 +40,26 @@ export async function createAudio (ctx) {
     ctx.status = 201
     ctx.body = {
         result: response
+    }
+}
+
+export async function createMultiAudios (ctx, next) {
+    const rawAudios = ctx.request.body
+
+    const audios = await Audio.create(rawAudios)
+
+    let ret = []
+
+    audios.forEach(async (audio) => {
+        const lyric = await fetchLyric(audio, ctx, next)
+        audio.lyrics = lyric._id
+        await audio.save()
+        ret.push(audio)
+    });
+
+    ctx.status = 201
+    ctx.body = {
+        result: ret
     }
 }
 
